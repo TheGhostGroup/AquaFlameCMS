@@ -50,14 +50,36 @@ abstract class Db_table
         $stmn = $this->prepareStatement($sql,$this->_makeArgumentsSafe($arguments));
         return $stmn->execute();
     }
+    
+    public function fetch($stmn)
+    {
+        return $this->_fetch($stmn);
+    }
+    
+    public function fetchAll($stmn)
+    {
+        return $this->_fetch($stmn);
+    }
+    
+    public function find($stmn,$field,$value)
+    {
+        $result = $this->_fetch($stmn);
+        foreach($result as $row)
+        {
+            if($row->$field == $value)
+            {
+                return $row;
+            }
+        }
+    }
 	
-	private function _fetch($result,$criteria = null)
+	private function _fetch($stmn,$criteria = null)
 	{
 	   if(1 < $result->rowCount())
 	   {
-	       return $result->fetchAll();
+	       return $stmn->fetchAll(PDO::FETCH_LAZY);
 	   }else{
-	       return $result->fetch(PDO::FETCH_LAZY);			
+	       return $stmn->fetch(PDO::FETCH_LAZY);			
 	   }
 	}
     
