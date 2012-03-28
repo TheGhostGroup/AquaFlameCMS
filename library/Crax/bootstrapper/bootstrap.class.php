@@ -17,17 +17,17 @@ class Bootstrap
             $this->setConfiguration(new Configuration());
             $this->getCache()->put('Configuration',$this->getConfiguration());
         }
-        /*if($this->getCache()->check('DB_Store'))
+        if($this->getCache()->check('DB_Store'))
         {
             $this->setDbStore($this->getCache()->get('DB_Store'));
         }else{
-            require('library/Crax/DB/mysql.class.php');
+            require('library/Crax/db/db_store.php');
             $this->setDbStore(new DB_Store($this));
             $this->getCache()->put('DB_Store',$this->getDbStore());
-        }*/
+        }
     }
     
-    /*public function getDbStore()
+    public function getDbStore()
     {
         return $this->_dbStore;
     }
@@ -36,7 +36,7 @@ class Bootstrap
     {
         $this->_dbStore = $store;
         return $this;
-    }*/
+    }
     
     public function getConfiguration()
     {
