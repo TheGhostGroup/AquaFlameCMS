@@ -15,22 +15,25 @@ abstract class Controller
     public function __sleep()
     {
         
-        return array("view","request","layout");
+        return array('view','request','layout');
     }
     
     public function __wakeup()
     {
-        
+        $this->preAction();
     }
     
     private function _loadDB()
     {
-        $result = scandir("application/models");
+        include_once 'library/Crax/db/db_table.php';
+        $result = scandir('application/models');
         foreach($result as $file)
         {
-            if(is_file("application/models/".$file))
+            if(is_file('application/models/'.$file))
             {
-                include_once "application/models/".$file;
+                include_once 'application/models/'.$file;
+                if(!strpos($file,'_'))
+                    include_once 'application/models/dbTable/'.$file;
             }
         }
     }
@@ -51,6 +54,7 @@ abstract class Controller
         }else{
             $this->view = ViewFactory::createView($this->getRequest()->getController(),$this->getRequest()->getAction());
         }
+        $this->_loadDB();
         ob_start();
     }
     
@@ -67,8 +71,7 @@ abstract class Controller
     
     public function run()
     {
-        $this->_loadDB();
-        $action = $this->getRequest()->getAction()."Action";
+        $action = $this->getRequest()->getAction().'Action';
         try{
             $this->preAction();
             $this->$action();

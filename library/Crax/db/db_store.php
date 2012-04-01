@@ -101,7 +101,7 @@ class DB_Store
     
     private function _fillDbTables($PDO,$DB)
     {
-        $tables = $PDO->fetchAll($PDO->query("SHOW TABLES"));
+        $tables = $PDO->query("SHOW TABLES")->fetchAll();
         foreach($tables as $table)
         {
             $this->_DbTableList[$DB] = $table;
