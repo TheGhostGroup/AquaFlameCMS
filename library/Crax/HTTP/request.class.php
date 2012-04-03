@@ -7,10 +7,10 @@ class HTTP_Request
     private $_parameters;
     private $_isValid;
     
-    public function __construct($URI)
+    public function __construct($URI,$relPath)
     {
         $this->_requestedURI = $URI;
-        $this->_segment();
+        $this->_segment($relPath);
         $this->_validateRequest();
     }
     
@@ -19,10 +19,12 @@ class HTTP_Request
         return array("_requestedURI","_controller","_action","_parameters","_isValid");
     }
     
-    private function _segment()
+    private function _segment($relPath)
     {
         $elements = explode("/",$this->_requestedURI);
         array_shift($elements);
+        if($relPath != "/")
+            array_shift($elements);
         if(empty($elements[0])){
             $this->_controller = "index";
             $this->_action = "index";

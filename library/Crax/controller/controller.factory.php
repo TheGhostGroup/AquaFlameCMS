@@ -4,7 +4,7 @@ class ControllerFactory
     public static function createController($bootstrap)
     {
         include('library/Crax/HTTP/request.class.php');
-        $request = new HTTP_Request($_SERVER['REQUEST_URI']);
+        $request = new HTTP_Request($_SERVER['REQUEST_URI'],$bootstrap->getConfiguration()->getOption("relPath"));
         $action = ucfirst($request->getAction())."Action";
         $controllerName = ucfirst($request->getController())."Controller";
         if($request->isValid()){

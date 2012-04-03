@@ -3,9 +3,11 @@ class Configuration
 {
     private $_dbHost = "localhost";
     private $_dbUser = "root";
-    private $_dbPass = "kabeli";
+    private $_dbPass = "test";
     
     private $_dbName = array("Character" => array("characters"),"World" => "world","Realm" => "realm");
+    
+    private $_relPath = "/";
     
     //private $_modulesEnabled = FALSE;
     
