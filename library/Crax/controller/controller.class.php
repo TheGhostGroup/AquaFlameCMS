@@ -4,18 +4,20 @@ abstract class Controller
     protected $view;
     protected $request;
     protected $layout;
+    protected $resourceRegistry;
     private $_hasLayout = FALSE;
     
-    public function __construct($request)
+    public function __construct($request,$registry)
     {
         $this->request = $request;
+        $this->resourceRegistry = $registry;
         $this->preAction();
     }
     
     public function __sleep()
     {
         
-        return array('view','request','layout');
+        return array('view','request','layout','resourceRegistry');
     }
     
     public function __wakeup()

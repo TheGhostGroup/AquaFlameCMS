@@ -25,7 +25,7 @@ class DB_Store
     
     public function createNewAdapter($caller,$db)
     {
-        $pdo = new PDO("mysql:host=".$this->_configuration->getOption("dbHost").";dbname=".$this->_configuration->getDBName("World"), $this->_configuration->getOption("dbUser"), $this->_configuration->getOption("dbPass"));
+        $pdo = new PDO("mysql:host=".$this->_configuration->getOption("dbHost").";dbname=".$db, $this->_configuration->getOption("dbUser"), $this->_configuration->getOption("dbPass"));
         return $this->_registerAdapter($pdo,$db,$caller);
     }
     

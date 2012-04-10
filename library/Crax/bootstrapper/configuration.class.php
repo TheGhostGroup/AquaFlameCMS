@@ -3,7 +3,7 @@ class Configuration
 {
     private $_dbHost = "localhost";
     private $_dbUser = "root";
-    private $_dbPass = "test";
+    private $_dbPass = "kabeli";
     
     private $_dbName = array("Character" => array("characters"),"World" => "world","Realm" => "realm");
     
@@ -17,9 +17,12 @@ class Configuration
         return $this->$var;
     }
     
-    public function getDBName($db)
+    public function getDBName($db,$num = 0)
     {
-        return $this->_dbName[$db];
+        if($db === "Character")
+            return $this->_dbName[$db][$num];
+        else
+            return $this->_dbName[$db];
     }
     
     public function getCountCharsDB()

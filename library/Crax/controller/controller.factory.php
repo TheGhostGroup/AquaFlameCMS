@@ -14,7 +14,7 @@ class ControllerFactory
             }else{
                 include_once('library/Crax/controller/controller.class.php');
                 require_once('application/controllers/'.$request->getController().'.php');
-                $controller = new $controllerName($request);
+                $controller = new $controllerName($request,$bootstrap->getResourceRegistry());
                 $bootstrap->getCache()->put($controllerName,$controller);
                 return $controller;
             }

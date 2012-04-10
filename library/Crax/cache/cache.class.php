@@ -40,13 +40,23 @@ class Cache
         {
             $len = strlen($name);
             if (substr($name,$len-10,10) === 'Controller'){
-                include_once('library/Crax/controller/controller.class.php');
-                include_once('application/controllers/'.strtolower(substr($name,0,$len-10)).'.php');
+                include_once 'library/Crax/controller/controller.class.php';
+                include_once 'library/Crax/resources/resource.registry.php';
+                include_once 'application/controllers/'.strtolower(substr($name,0,$len-10)).'.php';
             }else{
                 switch($name)
                 {
                     case 'Configuration':
-                        include_once('library/Crax/bootstrapper/configuration.class.php');
+                        include_once 'library/Crax/bootstrapper/configuration.class.php';
+                        break;
+                    case 'ResourceRegistry':
+                        include_once 'library/Crax/resources/resource.abstract.php';
+                        $result = scandir("library/Aquaflame/resources");
+                        foreach($result as $file){
+                            if(strstr($file,".php")){
+                                include_once "library/Aquaflame/resources/".$file;             
+                            }
+                        }
                         break;
                 }
             }
