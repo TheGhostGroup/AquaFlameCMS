@@ -1,6 +1,13 @@
 <?php
 class Armory_Resource extends Resource_Abstract
 {
+    public function __construct($registry)
+    {
+        $this->_name = "Armory Resource";
+        $this->_registry = $registry;
+        parent::__construct();
+    }
+    
 	static public function createCharacter($charName)
 	{
         include_once 'library/Aquaflame/resources/armory/armory.abstract.php';

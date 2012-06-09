@@ -1,16 +1,13 @@
 <?php
-class Wowheadparser_Resorce extends Resource_Abstract
+class Wowheadparser_Resource extends Resource_Abstract
 {
 	private $_imageName;
 	private $_htmlTooltip;
-	public function __construct($itemid)
+	public function __construct($registry)
 	{
         $this->_name = 'Wowhead Parser';
-		$filename = 'library/Crax/resources/wowheadparser/xmlcache/item_'.$itemid.'.xml';
-		if(!file_exists($filename)){
-			$this->_download($filename,$itemid);
-		}
-		$this->_parse_xml($filename);
+		$this->_registry = $registry;
+        parent::__construct();
 	}
 	
 	private function _download($filename,$item){
@@ -34,6 +31,15 @@ class Wowheadparser_Resorce extends Resource_Abstract
 		$this->_imageName = $values[8];
 		$this->_htmlTooltip = $values[10];
 	}
+    
+    public function setItemId($itemid)
+    {
+        $filename = 'library/Crax/resources/wowheadparser/xmlcache/item_'.$itemid.'.xml';
+        if(!file_exists($filename)){
+			$this->_download($filename,$itemid);
+		}
+		$this->_parse_xml($filename);
+    }
     
 	public function getItemImage()
 	{

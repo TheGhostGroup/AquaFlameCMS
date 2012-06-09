@@ -52,6 +52,7 @@ class Resource_Registry
             if(strstr($file,".php")){
                 include_once "library/Aquaflame/resources/".$file;
                 $name = ucfirst(substr($file,0,strlen($file)-12))."_Resource";
+                echo "Creating resource : ".$name."</br>";
                 new $name($this);
             }
         }
