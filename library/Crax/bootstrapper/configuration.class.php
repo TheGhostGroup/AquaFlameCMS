@@ -19,7 +19,7 @@ class Configuration
     
     public function getDBName($db,$num = 0)
     {
-        if($db === "Character")
+        if($db === "Character" && count($this->_dbName[$db]) >= $num)
             return $this->_dbName[$db][$num];
         else
             return $this->_dbName[$db];

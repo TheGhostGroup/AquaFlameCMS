@@ -91,9 +91,7 @@ class DB_Store
             }elseif($i == 1){
                 $this->_registerAdapter(new PDO("mysql:host=".$this->_configuration->getOption("dbHost").";dbname=".$this->_configuration->getDBName("Realm"), $this->_configuration->getOption("dbUser"), $this->_configuration->getOption("dbPass")),"RealmDB");
             }elseif($i == 2){
-                $tmp = $this->_configuration->getDBName("Character");
-                $charDB = $tmp[$i-2];
-                $this->_registerAdapter(new PDO("mysql:host=".$this->_configuration->getOption("dbHost").";dbname=".$charDB, $this->_configuration->getOption("dbUser"), $this->_configuration->getOption("dbPass")),"Character".$i-1);
+                $this->_registerAdapter(new PDO("mysql:host=".$this->_configuration->getOption("dbHost").";dbname=".$this->_configuration->getDBName("Character"), $this->_configuration->getOption("dbUser"), $this->_configuration->getOption("dbPass")),"Character".$i-1);
                 unset($tmp,$charDB);
             }
         }
