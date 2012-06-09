@@ -6,7 +6,7 @@ class Wowheadparser_Resorce extends Resource_Abstract
 	public function __construct($itemid)
 	{
         $this->_name = 'Wowhead Parser';
-		$filename = 'classes/wowheadparser/xmlcache/item_'.$itemid.'.xml';
+		$filename = 'library/Crax/resources/wowheadparser/xmlcache/item_'.$itemid.'.xml';
 		if(!file_exists($filename)){
 			$this->_download($filename,$itemid);
 		}
